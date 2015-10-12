@@ -2,7 +2,7 @@
 
 `A-pitch` is a format to represent music pitches and intervals in a simple and unified way, with independence of string representations.
 
-The objective of this project is to create an exchangeable pitch and interval format for javascript libraries.
+The aim of this project is to create an exchangeable pitch and interval format and allow music libraries to work regardless of the string representations.
 
 ## Features
 
