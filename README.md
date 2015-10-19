@@ -1,8 +1,6 @@
-# A-Pitch
+# Pitch array notation
 
-`A-pitch` is a format to represent music pitches and intervals in a simple and unified way, with independence of string representations.
-
-The aim of this project is to create an exchangeable pitch and interval format and allow music libraries to work regardless of the string representations.
+`pitch-array` is a format to represent music pitches and intervals in a simple and unified way. The aim of this project is to create an exchangeable pitch and interval format and allow music libraries to work regardless of the string representations and with no need to parse.
 
 ## Features
 
@@ -13,17 +11,17 @@ The aim of this project is to create an exchangeable pitch and interval format a
 
 ## Format description
 
-The `A-pitch` is an array of 3 integers with the form `[num, alteration, octave]` with the following characteristics:
+The `pitch-array` is an array of 3 integers with the form `[num, alteration, octave]` with the following characteristics:
 
-- __num__: must be a integer between 0 and 6. If the number is negative will be converted to positive. Values greater than 6 will be mod to 6 (7 and 0 is the same value). __Required.__
+- __num__: must be a integer between 0 and 6. If the number is negative will be converted to positive (-1 is 6, -2 is 5, ...). Values greater than 6 will be mod to 6 (7 and 0 is the same value). __Required.__
 - __alteration__: any integer. 0 means no alteration, negative numbers are for flats and positive for sharps. In theory there's no value limit, but most of the parsers set the aceptable values from -4 to +4. __Required.__
-- __octave__: a integer to represent the octave. In pitches it's just the octave, but with intervals a negative octave means descendent interval. __Optional, can be `null`.__
+- __octave__: a integer to represent the octave. In pitches it's just the octave, but with intervals a negative octave means descendent interval. __Optional, can be `null`.__ `null` for pitches is used to represent pitch classes (pitch without octaves). For intervals, 0 and null are same value.
 
 ### Encoding pitches
 
 The way to represent pitches is quite straight forward. Some self-explanatory examples:
 
-| Note in scientific notation | `A-pitch` representation |
+| Note in scientific notation | `pitch-array` notation |
 |----|-----------|
 | C2 | [0, 0, 2] |
 | C#4 | [0, 1, 4] |
@@ -50,7 +48,7 @@ The a-pitch array `[num, alteration, octave]` when representing pitches:
 
 Pitch classes (pitches without octaves) can be expressed by setting the octave to `null`
 
-| Pitch class | `A-pitch` representation |
+| Pitch class | `pitch-array` notation |
 |-------------|--------------------------|
 | C | [0, 0, null] |
 | Db | [1, -1, null] |
@@ -58,9 +56,9 @@ Pitch classes (pitches without octaves) can be expressed by setting the octave t
 
 ### Encoding intervals
 
-Any interval can be represented with an `A-pitch` array almost the same way that pitches (in fact they have a direct equivalence) but there are some semantic differences. Here are some examples:
+Any interval can be represented with an `pitch-array` array almost the same way that pitches (in fact they have a direct equivalence) but there are some semantic differences. Here are some examples:
 
-| Interval | `A-pitch` representation |
+| Interval | `pitch-array` notation |
 |----|----|
 | Perfect unison (1P) | [0, 0, 0] |
 | Augmented unison (1A) | [0, 1, 0] |
@@ -83,15 +81,15 @@ The a-pitch array `[num, alteration, octave]` when representing intervals:
 
 #### Descending intervals
 
-The first number of the `A-pitch` array must be always positive so descending intervals are encoded by inverting the interval and lowering an octave. For example, a descending major second is encoded as ascending minor seventh with an octave down: descending major second `[-2, 1, 0]`, inverted `[6, -1, 0]` with an octave lower `[6, -1, -1]`
+The first number of the `pitch-array` array must be always positive so descending intervals are encoded by inverting the interval and lowering an octave. For example, a descending major second is encoded as ascending minor seventh with an octave down: descending major second `[-2, 1, 0]`, inverted `[6, -1, 0]` with an octave lower `[6, -1, -1]`
 
 In fact, __all descending intervals has an octave < 0__
 
 ### Pitch-interval equivalence
 
-Any `A-pitch` value can represent indistinctly pitches or intervals. Here is the equivalence:
+Any `pitch-array` value can represent indistinctly pitches or intervals. Here is the equivalence:
 
-| `A-pitch` | Pitch | Interval |
+| `pitch-array` | Pitch | Interval |
 |----|----|----|
 | [0, 0, 0] | C0 | 1P (perfect unison) |
 | [1, 0, 0] | D0 | 2M (major second) |
