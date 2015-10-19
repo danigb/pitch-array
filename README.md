@@ -103,6 +103,14 @@ Convert to string to a-pitch:
 - [pitch-parser](https://github.com/danigb/pitch-parser): convert from pitch scientific notation to a-pitch (and the opposite)
 - [interval-parser](https://github.com/danigb/interval-parser): convert from interval strings to a-pitch (and the opposite)
 
+Working with music elements:
+
+- [music-scale](https://github.com/danigb/music-scale)
+- [music-chord](https://github.com/danigb/music-chord)
+- [music-gamut](https://github.com/danigb/music-gamut)
+- [pitch-transpose](https://github.com/danigb/pitch-transpose)
+- [pitch-op](https://github.com/danigb/pitch-op)
+
 Other libraries using this format:
 
 - [tonal](https://github.com/danigb/tonal)
